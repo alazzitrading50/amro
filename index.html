@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حاسبة الفرق بين أسعار الصرف</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!-- الصفحة الأولى: النموذج -->
+<div class="container">
+    <div class="header">
+        <h1>حساب الفارق بين أسعار الصرف</h1>
+    </div>
+
+    <form id="exchangeForm" action="result.html" method="get">
+        <div class="form-group">
+            <label for="originalAmount">المبلغ الأصلي بالدولار ($)</label>
+            <input type="number" id="originalAmount" name="originalAmount" required>
+        </div>
+
+        <div class="form-group">
+            <label for="rateOriginal">سعر الريال اليمني مقابل الدولار الحقيقي </label>
+            <input type="number" id="rateOriginal" name="rateOriginal" value="535" required>
+        </div>
+
+        <div class="form-group">
+            <label for="rateDifference">سعر الريال اليمني مقابل الدولار الوهمي </label>
+            <input type="number" id="rateDifference" name="rateDifference" value="527" required>
+        </div>
+
+        <button type="submit" class="btn">حساب</button>
+    </form>
+</div>
+</body>
+</html>

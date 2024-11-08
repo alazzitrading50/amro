@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حساب الفارق بين أسعار الصرف</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    
+
+    <!-- صفحة النتائج: العمليات الحسابية -->
+    <div class="container result-page">
+        <div class="header">
+            <h1>نتائج حساب الفارق بين أسعار الصرف</h1>
+        </div>
+
+        <table class="calculation-table">
+            <thead>
+                <tr>
+                    <th>العملية الحسابية</th>
+                    <th>القيمة</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>المبلغ الأصلي بالدولار</td>
+                    <td><span id="originalAmountResult"></span> $</td>
+                </tr>
+                <tr>
+                    <td>استبعاد 3$ من المبلغ الأصلي</td>
+                    <td><span id="afterExclusion"></span> $</td>
+                </tr>
+                <tr>
+                    <td>استبعاد 5$ لشخص آخر</td>
+                    <td><span id="afterFirstExclusion"></span> $</td>
+                </tr>
+                <tr>
+                    <td>استبعاد 7$ لي</td>
+                    <td><span id="afterSecondExclusion"></span> $</td>
+                </tr>
+                <tr>
+                    <td>الريال اليمني بـ 535 (المبلغ المتبقي)</td>
+                    <td><span id="rateOriginalResult"></span> ريال</td>
+                </tr>
+                <tr>
+                    <td>الريال اليمني بـ 527 (المبلغ المتبقي)</td>
+                    <td><span id="rateDifferenceResult"></span> ريال</td>
+                </tr>
+                <tr>
+                    <td>الفارق بين سعر الريال بـ 527 و 535</td>
+                    <td><span id="exchangeDifference"></span> ريال</td>
+                </tr>
+                <tr>
+                    <td>المبلغ الناتج من استبعاد 7$ (بـ 535)</td>
+                    <td><span id="sevenDollarAmount"></span> ريال</td>
+                </tr>
+                <tr>
+                    <td>المبلغ النهائي (المجموع)</td>
+                    <td><span id="finalAmountResult"></span> ريال</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // جلب القيم من النموذج الذي تم إدخاله في الصفحة الأولى
+        const params = new URLSearchParams(window.location.search);
+        const originalAmount = parseFloat(params.get('originalAmount'));
+        const rateOriginal = parseFloat(params.get('rateOriginal'));
+        const rateDifference = parseFloat(params.get('rateDifference'));
+
+        // العمليات الحسابية التي تم تحديدها
+        const amountAfterExclusion = originalAmount - 3;
+        const amountAfterFirstExclusion = amountAfterExclusion - 5;
+        const amountAfterSecondExclusion = amountAfterFirstExclusion - 7;
+
+        const amountInYemeniOriginal = amountAfterSecondExclusion * rateOriginal;
+        const amountInYemeniDifference = amountAfterSecondExclusion * rateDifference;
+
+        // حساب الفارق بين السعرين 527 و 535
+        const exchangeDifference = amountInYemeniDifference - amountInYemeniOriginal;
+
+        // تحويل مبلغ 7$ إلى الريال اليمني حسب سعر الصرف 535
+        const amountForSevenDollars = 7 * rateOriginal;
+
+        // جمع فارق السعر مع مبلغ 7$ بالريال اليمني
+        const finalAmount = exchangeDifference - amountForSevenDollars;
+
+        // عرض العمليات الحسابية في الجدول
+        document.getElementById('originalAmountResult').textContent = originalAmount.toFixed(2);
+        document.getElementById('afterExclusion').textContent = amountAfterExclusion.toFixed(2);
+        document.getElementById('afterFirstExclusion').textContent = amountAfterFirstExclusion.toFixed(2);
+        document.getElementById('afterSecondExclusion').textContent = amountAfterSecondExclusion.toFixed(2);
+        document.getElementById('rateOriginalResult').textContent = amountInYemeniOriginal.toFixed(2);
+        document.getElementById('rateDifferenceResult').textContent = amountInYemeniDifference.toFixed(2);
+        document.getElementById('exchangeDifference').textContent = exchangeDifference.toFixed(2);
+        document.getElementById('sevenDollarAmount').textContent = amountForSevenDollars.toFixed(2);
+        document.getElementById('finalAmountResult').textContent = finalAmount.toFixed(2);
+    </script>
+<br><br>
+<a href="index.html" class="btn" style="width: 500px !important;">الرجوع الى صفحة الحساب</a>
+</body>
+</html>
